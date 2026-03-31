@@ -1,0 +1,39 @@
+:host {
+  display: block;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+}
+
+.marquee-container {
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.65);
+  padding: 8px 0;
+}
+
+.marquee-track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: scroll 30s linear infinite;
+}
+
+.marquee-item {
+  color: #fff;
+  font-size: 14px;
+  font-family: sans-serif;
+  padding: 0 12px;
+}
+
+.marquee-item::after {
+  content: '·';
+  margin-left: 12px;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
