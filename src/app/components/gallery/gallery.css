@@ -52,7 +52,7 @@
 }
 
 .gallery-item {
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   cursor: pointer;
   position: relative;

@@ -9,7 +9,7 @@
   <div class="gallery-grid">
     @for (item of items; track item.id) {
       <div class="gallery-item" (click)="openModal(item)">
-        <img [src]="item.image" [alt]="item.title" />
+        <img [src]="item.thumb" [alt]="item.title" />
       </div>
     }
   </div>
