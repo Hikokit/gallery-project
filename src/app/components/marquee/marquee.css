@@ -7,26 +7,58 @@
 
 .marquee-container {
   overflow: hidden;
-  background: rgba(0, 0, 0, 0.65);
-  padding: 8px 0;
+  background: #1500cc;
+  padding: 7px 0;
+  border-top: 2px solid #ffdd00;
+  border-bottom: 2px solid #ffdd00;
+  position: relative;
+}
+
+/* Scanline overlay */
+.marquee-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 2px,
+    rgba(0, 0, 0, 0.15) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
 }
 
 .marquee-track {
   display: inline-flex;
   white-space: nowrap;
   animation: scroll 30s linear infinite;
+  position: relative;
+  z-index: 2;
 }
 
 .marquee-item {
+  color: #ffdd00;
+  font-size: 13px;
+  font-family: 'VCR', monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0 10px;
+  text-shadow: 0 0 8px rgba(255, 221, 0, 0.6);
+}
+
+.marquee-item:nth-child(even) {
   color: #fff;
-  font-size: 14px;
-  font-family: sans-serif;
-  padding: 0 12px;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
 }
 
 .marquee-item::after {
-  content: '·';
-  margin-left: 12px;
+  content: '◆';
+  margin-left: 10px;
+  font-size: 8px;
+  opacity: 0.6;
+  vertical-align: middle;
 }
 
 @keyframes scroll {

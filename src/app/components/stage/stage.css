@@ -23,7 +23,7 @@
 }
 
 .stage-text h1 {
-  font-family: serif;
+  font-family: 'VCR', monospace;
   font-size: clamp(3rem, 8vw, 7rem);
   font-weight: 400;
   line-height: 1.1;
