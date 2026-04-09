@@ -1,0 +1,88 @@
+<div class="music-player-container">
+  <!-- WINAMP-STYLE PLAYER -->
+  <div class="player-window">
+    <!-- Barra de título -->
+    <div class="title-bar">
+      <div class="title-text">♫ Winamp Player ♫</div>
+      <div class="window-buttons">
+        <button class="btn-minimize">_</button>
+        <button class="btn-maximize">□</button>
+        <button class="btn-close" (click)="showPlaylist.set(!showPlaylist())">×</button>
+      </div>
+    </div>
+
+    <!-- Display LCD -->
+    <div class="lcd-display">
+      <div class="equalizer">
+        <div class="eq-bar" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]"></div>
+      </div>
+      <div class="info-display">
+        <div class="now-playing">{{ tracks()[currentTrackIndex()].title }}</div>
+        <div class="time-display">{{ formatTime(currentTime()) }} / {{ formatTime(duration()) }}</div>
+      </div>
+    </div>
+
+    <!-- Barra de Progresso -->
+    <div class="progress-section">
+      <input 
+        type="range" 
+        min="0" 
+        [max]="duration()" 
+        [value]="currentTime()"
+        (change)="seek($event)"
+        class="progress-bar"
+      >
+    </div>
+
+    <!-- Controles Principais -->
+    <div class="controls">
+      <button class="control-btn btn-prev" (click)="previousTrack()" title="Anterior">
+        ⏮ | ◄◄
+      </button>
+      <button class="control-btn btn-play" (click)="togglePlayPause()" title="Play/Pause">
+        {{ isPlaying() ? '⏸ ||' : '▶ ►' }}
+      </button>
+      <button class="control-btn btn-stop" (click)="stop()" title="Stop">
+        ⏹ ■
+      </button>
+      <button class="control-btn btn-next" (click)="nextTrack()" title="Próximo">
+        ►► | ⏭
+      </button>
+    </div>
+
+    <!-- Controle de Volume -->
+    <div class="volume-section">
+      <span class="volume-icon">🔊</span>
+      <input 
+        type="range" 
+        min="0" 
+        max="100" 
+        [value]="volume()"
+        (change)="setVolume($event)"
+        class="volume-slider"
+      >
+      <span class="volume-value">{{ volume() }}%</span>
+    </div>
+  </div>
+
+  <!-- PLAYLIST -->
+  <div class="playlist-container" *ngIf="showPlaylist()">
+    <div class="playlist-title">
+      <span>Playlist ({{ tracks().length }} tracks)</span>
+    </div>
+    <div class="playlist-items">
+      <div 
+        class="playlist-item" 
+        *ngFor="let track of tracks(); let i = index"
+        [class.active]="i === currentTrackIndex()"
+        (click)="loadTrack(i); play()"
+      >
+        <span class="track-number">{{ i + 1 }}</span>
+        <div class="track-info">
+          <div class="track-title">{{ track.title }}</div>
+          <div class="track-artist">{{ track.artist }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

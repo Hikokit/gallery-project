@@ -1,0 +1,54 @@
+<section class="gallery">
+  <div class="gallery-toolbar">
+    <span class="filter-label">FILTER BY:</span>
+    <button class="filter-btn" [class.active]="activeFilter() === 'platform'" (click)="activeFilter.set(activeFilter() === 'platform' ? null : 'platform')">PLATFORM</button>
+    <button class="filter-btn" [class.active]="activeFilter() === 'publisher'" (click)="activeFilter.set(activeFilter() === 'publisher' ? null : 'publisher')">PUBLISHER</button>
+    <button class="filter-btn" [class.active]="activeFilter() === 'tag'" (click)="activeFilter.set(activeFilter() === 'tag' ? null : 'tag')">TAG</button>
+  </div>
+
+  <div class="gallery-grid">
+    @for (item of items; track item.id; let i = $index) {
+      <div class="gallery-item" [style.--i]="i" (click)="openModal(item)">
+        <img [src]="item.thumb" [alt]="item.title" />
+        <div class="gallery-item-overlay">
+          <span class="gallery-item-title">{{ item.title }}</span>
+        </div>
+        @if (item.video) {
+          <video #previewVideo
+                 class="gallery-item-preview"
+                 [src]="item.video"
+                 muted loop preload="metadata"
+                 (mouseenter)="previewVideo.play()"
+                 (mouseleave)="previewVideo.pause(); previewVideo.currentTime = 0">
+          </video>
+          <span class="play-icon">&#9654;</span>
+        }
+      </div>
+    }
+  </div>
+</section>
+
+@if (selectedItem()) {
+  <div class="modal-overlay" (click)="onOverlayClick($event)">
+    <div class="modal">
+      <button class="modal-close" (click)="closeModal()">&#x2715;</button>
+      @if (selectedItem()!.video) {
+        <video class="modal-image" [src]="selectedItem()!.video" controls autoplay></video>
+      } @else {
+        <img class="modal-image" [src]="selectedItem()!.image" [alt]="selectedItem()!.title" />
+      }
+      <div class="modal-info">
+        <h2 class="modal-title">{{ selectedItem()!.title }}</h2>
+        <p class="modal-meta">
+          {{ selectedItem()!.platform }}, {{ selectedItem()!.year }}.
+          Game developed by {{ selectedItem()!.developer }} and published by {{ selectedItem()!.publisher }}.
+        </p>
+        <div class="modal-tags">
+          @for (tag of selectedItem()!.tags; track tag) {
+            <span class="tag">{{ tag }}</span>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+}
