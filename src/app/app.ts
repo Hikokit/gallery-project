@@ -5,11 +5,10 @@ import { Content } from './components/content/content';
 import { Marquee } from './components/marquee/marquee';
 import { Stage } from './components/stage/stage';
 import { Gallery } from './components/gallery/gallery';
-import { MusicPlayer } from './components/music-player/music-player';
 
 @Component({
   selector: 'app-root',
-  imports: [Header, Footer, Content, Marquee, Stage, Gallery, MusicPlayer],
+  imports: [Header, Footer, Content, Marquee, Stage, Gallery],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
