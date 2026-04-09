@@ -1,0 +1,45 @@
+<div class="mp3-player">
+  <div class="player-pill">
+
+    <button class="btn-play" (click)="togglePlay()">
+      @if (isPlaying()) {
+        <span class="pause-icon">&#9646;&#9646;</span>
+      } @else {
+        <span class="play-icon">&#9654;</span>
+      }
+    </button>
+
+    <div class="player-info">
+      <div class="track-row">
+        <span class="track-name">{{ currentTrack().name }}</span>
+        <div class="nav-btns">
+          <button class="btn-nav" (click)="prevTrack()">&#9664;</button>
+          <button class="btn-nav" (click)="nextTrack()">&#9654;</button>
+        </div>
+      </div>
+      <div class="progress-row">
+        <span class="time">{{ formatTime(currentTime()) }}</span>
+        <div class="progress-bar" (click)="seek($event)">
+          <div class="progress-fill" [style.width.%]="progressPercent()">
+            <span class="progress-dot"></span>
+          </div>
+        </div>
+        <span class="time">{{ formatTime(duration()) }}</span>
+      </div>
+      <div class="volume-row">
+        <button class="btn-mute" (click)="toggleMute()">
+          {{ isMuted() ? '▐×' : '▐))' }}
+        </button>
+        <div class="volume-bar"
+          (pointerdown)="onVolumePointerDown($event)"
+          (pointermove)="onVolumePointerMove($event)"
+          (pointerup)="onVolumePointerUp()">
+          <div class="volume-fill" [style.width.%]="isMuted() ? 0 : volume() * 100">
+            <span class="volume-dot"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
