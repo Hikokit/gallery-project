@@ -19,6 +19,7 @@ export interface DesktopIcon {
 })
 export class Stage {
   activeWindow = signal<string | null>(null);
+  backgroundImageUrl = 'backgroundgreen.png';
 
   icons: DesktopIcon[] = [
     { id: 'about',     label: 'about.txt',    icon: '📄', top: '8%',  left: '3%'  },

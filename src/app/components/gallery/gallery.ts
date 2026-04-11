@@ -14,6 +14,11 @@ export interface GalleryItem {
   tags: string[];
 }
 
+export interface RetroGif {
+  src: string;
+  alt: string;
+}
+
 @Component({
   selector: 'app-gallery',
   imports: [CommonModule],
@@ -22,7 +27,28 @@ export interface GalleryItem {
 })
 export class Gallery {
   selectedItem = signal<GalleryItem | null>(null);
-  activeFilter = signal<string | null>(null);
+
+  retroGifs: RetroGif[] = [
+    { src: 'gifs/auau.gif', alt: 'auau retro button' },
+    { src: 'gifs/banner5.gif', alt: 'banner5 retro button' },
+    { src: 'gifs/bestviewedcomp.gif', alt: 'best viewed on computer button' },
+    { src: 'gifs/blacksun_icon2.gif', alt: 'black sun icon button' },
+    { src: 'gifs/blender_get.gif', alt: 'get blender button' },
+    { src: 'gifs/caramelldansen.gif', alt: 'caramelldansen button' },
+    { src: 'gifs/cca_neocities_button.gif', alt: 'neocities button' },
+    { src: 'gifs/cheru.gif', alt: 'cheru button' },
+    { src: 'gifs/coco_cade.gif', alt: 'coco cade button' },
+    { src: 'gifs/dawa.gif', alt: 'dawa button' },
+    { src: 'gifs/get3dnow.gif', alt: 'get 3d now button' },
+    { src: 'gifs/gmail.gif', alt: 'gmail button' },
+    { src: 'gifs/msiegif_19981201.gif', alt: 'microsoft internet explorer button' },
+    { src: 'gifs/nyaabanner.gif', alt: 'nyaa banner button' },
+    { src: 'gifs/reshirii.gif', alt: 'reshirii button' },
+    { src: 'gifs/rocciebutton.gif', alt: 'roccie button' },
+    { src: 'gifs/sel486.gif', alt: '486 selector button' },
+    { src: 'gifs/sitebutton.png', alt: 'site button' },
+    { src: 'gifs/vomitboyz.png', alt: 'vomitboyz button' },
+  ];
 
   items: GalleryItem[] = [
     {

@@ -1,9 +1,8 @@
 <section class="gallery">
-  <div class="gallery-toolbar">
-    <span class="filter-label">FILTER BY:</span>
-    <button class="filter-btn" [class.active]="activeFilter() === 'platform'" (click)="activeFilter.set(activeFilter() === 'platform' ? null : 'platform')">PLATFORM</button>
-    <button class="filter-btn" [class.active]="activeFilter() === 'publisher'" (click)="activeFilter.set(activeFilter() === 'publisher' ? null : 'publisher')">PUBLISHER</button>
-    <button class="filter-btn" [class.active]="activeFilter() === 'tag'" (click)="activeFilter.set(activeFilter() === 'tag' ? null : 'tag')">TAG</button>
+  <div class="retro-gif-strip" aria-label="retro web badges">
+    @for (gif of retroGifs; track gif.src) {
+      <img class="retro-gif" [src]="gif.src" [alt]="gif.alt" width="88" height="31" loading="lazy" decoding="async" />
+    }
   </div>
 
   <div class="gallery-grid">

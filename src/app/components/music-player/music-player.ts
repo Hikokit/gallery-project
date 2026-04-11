@@ -35,13 +35,54 @@ export class MusicPlayer implements OnDestroy {
   );
 
   private audio: HTMLAudioElement | null = null;
+  private removeAutoplayFallbackListeners: (() => void) | null = null;
 
   constructor() {
     if (this.isBrowser) {
       this.audio = new Audio();
+      this.audio.src = this.currentTrack().src;
+      this.audio.volume = 0.5;
+      this.volume.set(0.5);
+      this.isMuted.set(false);
       this.audio.addEventListener('ended', () => this.nextTrack());
       this.audio.addEventListener('timeupdate', () => this.currentTime.set(this.audio!.currentTime));
       this.audio.addEventListener('loadedmetadata', () => this.duration.set(this.audio!.duration));
+
+      this.audio.play()
+        .then(() => this.isPlaying.set(true))
+        .catch(() => this.registerAutoplayFallback());
+    }
+  }
+
+  private registerAutoplayFallback() {
+    const events: (keyof WindowEventMap)[] = ['pointerdown', 'keydown', 'touchstart'];
+
+    const handleFirstInteraction = () => {
+      if (!this.audio) return;
+
+      this.audio.volume = this.volume();
+      this.audio.play()
+        .then(() => this.isPlaying.set(true))
+        .catch(() => this.isPlaying.set(false));
+
+      this.cleanupAutoplayFallback();
+    };
+
+    events.forEach((eventName) => {
+      window.addEventListener(eventName, handleFirstInteraction, { once: true });
+    });
+
+    this.removeAutoplayFallbackListeners = () => {
+      events.forEach((eventName) => {
+        window.removeEventListener(eventName, handleFirstInteraction);
+      });
+    };
+  }
+
+  private cleanupAutoplayFallback() {
+    if (this.removeAutoplayFallbackListeners) {
+      this.removeAutoplayFallbackListeners();
+      this.removeAutoplayFallbackListeners = null;
     }
   }
 
@@ -138,6 +179,7 @@ export class MusicPlayer implements OnDestroy {
   }
 
   ngOnDestroy() {
+    this.cleanupAutoplayFallback();
     if (this.audio) {
       this.audio.pause();
       this.audio.src = '';
