@@ -17,9 +17,9 @@ export class MusicPlayer implements OnDestroy {
   private isBrowser = isPlatformBrowser(this.platformId);
 
   tracks: Track[] = [
-    { name: 'LAGTRAIN (TRAP/JERSEY CLUB REMIX) - FIELPS', src: '/music/Lagtrain (Trap_Jersey Club remix) - Fielps (youtube).mp3' },
-    { name: "FCKIN' ACTIVE VOICE LOL - KIEL", src: "/music/fckin' active voice lol - KIEL (youtube).mp3" },
-    { name: 'LISA FRANK 420 - MACINTOSH PLUS', src: '/music/MACINTOSH PLUS - FLORAL SHOPPE - 02 リサフランク420 - 現代のコンピュー - ａｅｓｔｈｅｔｉｃｓ (youtube).mp3' },
+    { name: 'LAGTRAIN (TRAP/JERSEY CLUB REMIX) - FIELPS', src: 'music/Lagtrain (Trap_Jersey Club remix) - Fielps (youtube).mp3' },
+    { name: "FCKIN' ACTIVE VOICE LOL - KIEL", src: "music/fckin' active voice lol - KIEL (youtube).mp3" },
+    { name: 'LISA FRANK 420 - MACINTOSH PLUS', src: 'music/MACINTOSH PLUS - FLORAL SHOPPE - 02 リサフランク420 - 現代のコンピュー - ａｅｓｔｈｅｔｉｃｓ (youtube).mp3' },
   ];
 
   currentIndex = signal(0);
@@ -51,7 +51,8 @@ export class MusicPlayer implements OnDestroy {
       this.audio.pause();
       this.isPlaying.set(false);
     } else {
-      if (this.audio.src !== location.origin + this.currentTrack().src) {
+      const resolvedSrc = new URL(this.currentTrack().src, window.location.href).href;
+      if (this.audio.src !== resolvedSrc) {
         this.audio.src = this.currentTrack().src;
       }
       this.audio.play().catch(() => this.isPlaying.set(false));
