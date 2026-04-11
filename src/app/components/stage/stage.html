@@ -1,7 +1,166 @@
 <section class="stage">
+
+  <!-- Desktop icons -->
+  @for (icon of icons; track icon.id) {
+    <div class="desktop-icon"
+      [style.top]="icon.top"
+      [style.left]="icon.left"
+      [style.right]="icon.right"
+      [style.bottom]="icon.bottom"
+      (click)="openWindow(icon.id)">
+      <div class="icon-img">{{ icon.icon }}</div>
+      <div class="icon-label">{{ icon.label }}</div>
+    </div>
+  }
+
+  <!-- Center text -->
   <div class="stage-text">
-    <h1>kitch/kiel/wicked</h1>
+    <h1>kitch/kiel</h1>
     <h1>Askin, NZ/AU</h1>
     <h1>Internet Art</h1>
   </div>
+
+  <!-- Music player -->
+  <app-music-player></app-music-player>
+
+  <!-- Social links -->
+  <div class="social-links">
+    <a class="social-btn" href="#" target="_blank" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <circle cx="12" cy="12" r="4.5"/>
+        <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/>
+      </svg>
+    </a>
+    <a class="social-btn" href="#" target="_blank" aria-label="X">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L2.25 2.25h6.893l4.258 5.636 5.843-5.636zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+      </svg>
+    </a>
+  </div>
+
+  <!-- OS Windows -->
+  @if (activeWindow()) {
+    <div class="win-overlay" (click)="onOverlayClick()">
+      <div class="os-window" (click)="$event.stopPropagation()">
+
+        <div class="win-titlebar">
+          <span class="win-title">
+            @switch (activeWindow()) {
+              @case ('about')     { about.txt - Notepad }
+              @case ('works')     { My Works }
+              @case ('guestbook') { Guestbook v1.2 }
+              @case ('internet')  { Internet Explorer 4.0 }
+              @case ('links')     { links.html }
+              @case ('mail')      { Outlook Express }
+            }
+          </span>
+          <div class="win-controls">
+            <button class="win-btn">_</button>
+            <button class="win-btn">□</button>
+            <button class="win-btn win-close" (click)="closeWindow($event)">✕</button>
+          </div>
+        </div>
+
+        <div class="win-body">
+          @switch (activeWindow()) {
+
+            @case ('about') {
+              <div class="win-content notepad">
+                <p class="blink">★ WELCOME TO MY PAGE ★</p>
+                <div class="divider">════════════════════</div>
+                <p><strong>kitch / kiel askin</strong></p>
+                <p>NZ/AU · Internet Artist</p>
+                <p>3D · Animation · Web</p>
+                <div class="divider">════════════════════</div>
+                <p class="small">best viewed in 800x600</p>
+                <p class="small">netscape navigator 4.0</p>
+                <div class="counter">visitors: <span class="counter-num">004872</span></div>
+              </div>
+            }
+
+            @case ('works') {
+              <div class="win-content">
+                <p class="blink">📁 MY WORKS</p>
+                <div class="divider">════════════════════</div>
+                <div class="file-list">
+                  <div class="file-item">📂 3D Animation</div>
+                  <div class="file-item">📂 Internet Art</div>
+                  <div class="file-item">📂 Characters</div>
+                  <div class="file-item">📂 Environments</div>
+                </div>
+                <div class="divider">────────────────────</div>
+                <p class="small">↓ scroll down to view gallery</p>
+              </div>
+            }
+
+            @case ('guestbook') {
+              <div class="win-content">
+                <p class="blink">📖 GUESTBOOK</p>
+                <div class="divider">════════════════════</div>
+                <div class="guest-entry">
+                  <span class="guest-name">✦ anonimous_1337:</span>
+                  <span class="guest-msg">cool site!! love ur art</span>
+                </div>
+                <div class="guest-entry">
+                  <span class="guest-name">✦ net_wanderer:</span>
+                  <span class="guest-msg">found this via webrings :)</span>
+                </div>
+                <div class="guest-entry">
+                  <span class="guest-name">✦ pixel_ghost:</span>
+                  <span class="guest-msg">the 3d chars r amazing</span>
+                </div>
+                <div class="divider">────────────────────</div>
+                <p class="small new-badge">NEW ► sign my guestbook!</p>
+              </div>
+            }
+
+            @case ('internet') {
+              <div class="win-content ie">
+                <div class="ie-bar">🌐 http://kitch-kiel.net/</div>
+                <div class="divider">════════════════════</div>
+                <p>⚠ this page uses frames</p>
+                <p>⚠ enable javascript</p>
+                <p>⚠ get flash player</p>
+                <div class="divider">────────────────────</div>
+                <p class="blink small">● page loading... 56k</p>
+              </div>
+            }
+
+            @case ('links') {
+              <div class="win-content">
+                <p class="blink">🔗 COOL LINKS</p>
+                <div class="divider">════════════════════</div>
+                <div class="link-list">
+                  <div class="link-item">► geocities.com</div>
+                  <div class="link-item">► newgrounds.com</div>
+                  <div class="link-item">► deviantart.com</div>
+                  <div class="link-item">► albino black sheep</div>
+                  <div class="link-item">► flashkit.com</div>
+                </div>
+                <div class="divider">────────────────────</div>
+                <p class="small">webring member ✦</p>
+              </div>
+            }
+
+            @case ('mail') {
+              <div class="win-content">
+                <p class="blink">✉ MAIL</p>
+                <div class="divider">════════════════════</div>
+                <p>you have <strong>3</strong> new messages</p>
+                <div class="divider">────────────────────</div>
+                <div class="mail-item">📧 re: collab?</div>
+                <div class="mail-item">📧 ur art is so good</div>
+                <div class="mail-item">📧 webring invite</div>
+                <div class="divider">────────────────────</div>
+                <p class="small">contact: kitch&#64;kiel.net</p>
+              </div>
+            }
+
+          }
+        </div>
+      </div>
+    </div>
+  }
+
 </section>

@@ -1,0 +1,233 @@
+:host {
+  display: block;
+}
+
+.mp3-player {
+  position: absolute;
+  bottom: 32px;
+  left: 32px;
+}
+
+.player-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 380px;
+  padding: 8px 18px 8px 8px;
+  border-radius: 50px;
+  background: linear-gradient(180deg,
+    rgba(52, 152, 219, 0.55) 0%,
+    rgba(21, 0, 204, 0.5) 40%,
+    rgba(14, 0, 140, 0.52) 100%
+  );
+  backdrop-filter: blur(6px);
+  box-shadow:
+    0 6px 20px rgba(0, 0, 100, 0.45),
+    0 0 0 1px rgba(52, 152, 219, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gloss highlight */
+.player-pill::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 5%;
+  right: 5%;
+  height: 48%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.04) 100%);
+  border-radius: 50px 50px 60% 60%;
+  pointer-events: none;
+}
+
+/* Play button */
+.btn-play {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 35%, rgba(52, 152, 219, 0.8), rgba(21, 0, 204, 0.75) 55%, rgba(14, 0, 140, 0.8));
+  border: 2px solid rgba(52, 152, 219, 0.5);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 0 14px rgba(60, 120, 255, 0.35);
+  transition: transform 0.1s;
+  position: relative;
+  z-index: 1;
+}
+
+.btn-play:active {
+  transform: scale(0.91);
+}
+
+.play-icon {
+  font-size: 20px;
+  margin-left: 4px;
+  display: block;
+}
+
+.pause-icon {
+  font-size: 14px;
+  display: block;
+  letter-spacing: -1px;
+}
+
+/* Info area */
+.player-info {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.track-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  gap: 6px;
+}
+
+.track-name {
+  font-family: 'VCR', monospace;
+  font-size: 11px;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 4px rgba(0, 0, 120, 0.7);
+  letter-spacing: 0.03em;
+  flex: 1;
+  min-width: 0;
+}
+
+.nav-btns {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.btn-nav {
+  background: none;
+  border: none;
+  color: rgba(200, 225, 255, 0.75);
+  font-size: 13px;
+  padding: 0 5px;
+  transition: color 0.1s, transform 0.1s;
+  line-height: 1;
+}
+
+.btn-nav:hover {
+  color: #fff;
+}
+
+.btn-nav:active {
+  transform: scale(0.88);
+}
+
+/* Progress */
+.progress-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.time {
+  font-family: 'VCR', monospace;
+  font-size: 10px;
+  color: rgba(190, 215, 255, 0.85);
+  flex-shrink: 0;
+  letter-spacing: 0.03em;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 5px;
+  background: rgba(0, 20, 80, 0.55);
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #90c0ff, #5090ff);
+  border-radius: 2px;
+  position: relative;
+  transition: width 0.15s linear;
+}
+
+.volume-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+  max-width: 42%;
+}
+
+.btn-mute {
+  background: none;
+  border: none;
+  color: rgba(190, 215, 255, 0.6);
+  font-family: 'VCR', monospace;
+  font-size: 6px;
+  padding: 0;
+  flex-shrink: 0;
+  letter-spacing: -0.5px;
+  transition: color 0.1s;
+}
+
+.btn-mute:hover {
+  color: #fff;
+}
+
+.volume-bar {
+  flex: 1;
+  height: 5px;
+  background: rgba(0, 20, 80, 0.55);
+  border-radius: 3px;
+  cursor: pointer;
+  position: relative;
+  touch-action: none;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.volume-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #90c0ff, #5090ff);
+  border-radius: 2px;
+  position: relative;
+  transition: width 0.1s;
+}
+
+.volume-dot {
+  position: absolute;
+  right: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 9px;
+  height: 9px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(120, 180, 255, 0.9);
+}
+
+.progress-dot {
+  position: absolute;
+  right: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(120, 180, 255, 0.9);
+}

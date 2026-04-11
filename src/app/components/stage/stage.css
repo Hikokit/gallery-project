@@ -22,6 +22,299 @@
   user-select: none;
 }
 
+.social-links {
+  position: absolute;
+  bottom: 32px;
+  right: 32px;
+  display: flex;
+  gap: 10px;
+}
+
+.social-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(180deg,
+    rgba(52, 152, 219, 0.55) 0%,
+    rgba(21, 0, 204, 0.5) 40%,
+    rgba(14, 0, 140, 0.52) 100%
+  );
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(52, 152, 219, 0.35);
+  box-shadow:
+    0 4px 14px rgba(0, 0, 100, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.85);
+  transition: color 0.15s, box-shadow 0.15s, transform 0.1s;
+  position: relative;
+  overflow: hidden;
+}
+
+.social-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 48%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.25) 0%, transparent 100%);
+  border-radius: 50% 50% 60% 60%;
+  pointer-events: none;
+}
+
+.social-btn svg {
+  width: 20px;
+  height: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.social-btn:hover {
+  color: #fff;
+  box-shadow:
+    0 6px 20px rgba(0, 0, 160, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.social-btn:active {
+  transform: scale(0.92);
+}
+
+/* ── Desktop Icons ─────────────────── */
+.desktop-icon {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  width: 72px;
+  padding: 6px 4px;
+  border-radius: 2px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.1s;
+}
+
+.desktop-icon:hover {
+  background: rgba(0, 0, 128, 0.45);
+  outline: 1px dotted rgba(255, 255, 255, 0.8);
+}
+
+.desktop-icon:active {
+  background: rgba(0, 0, 200, 0.55);
+}
+
+.icon-img {
+  font-size: 34px;
+  line-height: 1;
+  image-rendering: pixelated;
+  filter: drop-shadow(1px 1px 0 rgba(0,0,0,0.5));
+}
+
+.icon-label {
+  font-family: 'VCR', monospace;
+  font-size: 10px;
+  color: #fff;
+  text-align: center;
+  line-height: 1.2;
+  text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
+  word-break: break-word;
+}
+
+/* ── OS Window overlay ──────────────── */
+.win-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.os-window {
+  background: #c0c0c0;
+  border-top: 2px solid #fff;
+  border-left: 2px solid #fff;
+  border-right: 2px solid #808080;
+  border-bottom: 2px solid #808080;
+  box-shadow: 2px 2px 0 #000;
+  min-width: 280px;
+  max-width: 340px;
+  width: 100%;
+  font-family: 'VCR', monospace;
+}
+
+.win-titlebar {
+  background: linear-gradient(90deg, #000080, #1084d0);
+  padding: 4px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.win-title {
+  color: #fff;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.win-controls {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.win-btn {
+  width: 16px;
+  height: 14px;
+  background: #c0c0c0;
+  border-top: 1px solid #fff;
+  border-left: 1px solid #fff;
+  border-right: 1px solid #808080;
+  border-bottom: 1px solid #808080;
+  font-size: 9px;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.win-close:hover {
+  background: #cc0000;
+  color: #fff;
+}
+
+.win-body {
+  padding: 2px;
+  background: #c0c0c0;
+}
+
+/* ── Window content ─────────────────── */
+.win-content {
+  background: #fff;
+  border-top: 1px solid #808080;
+  border-left: 1px solid #808080;
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  padding: 12px 14px;
+  font-size: 11px;
+  color: #000;
+  line-height: 1.8;
+}
+
+.win-content p {
+  margin: 2px 0;
+}
+
+.divider {
+  color: #808080;
+  font-size: 10px;
+  margin: 6px 0;
+  letter-spacing: -1px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.blink {
+  animation: blink 1.2s step-end infinite;
+  font-weight: bold;
+  color: #000080;
+}
+
+.small {
+  font-size: 10px;
+  color: #555;
+}
+
+.counter {
+  margin-top: 8px;
+  background: #000;
+  color: #0f0;
+  padding: 3px 8px;
+  font-size: 11px;
+  display: inline-block;
+  letter-spacing: 0.1em;
+}
+
+.counter-num {
+  color: #0f0;
+}
+
+.file-list, .link-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.file-item, .link-item {
+  font-size: 11px;
+  padding: 2px 4px;
+  cursor: pointer;
+}
+
+.file-item:hover, .link-item:hover {
+  background: #000080;
+  color: #fff;
+}
+
+.guest-entry {
+  margin: 4px 0;
+  font-size: 10px;
+}
+
+.guest-name {
+  color: #000080;
+  font-weight: bold;
+  display: block;
+}
+
+.guest-msg {
+  color: #333;
+  padding-left: 10px;
+  display: block;
+}
+
+.new-badge {
+  color: #c00;
+  font-weight: bold;
+  animation: blink 0.8s step-end infinite;
+}
+
+.ie-bar {
+  background: #fff;
+  border: 1px inset #808080;
+  padding: 2px 6px;
+  font-size: 10px;
+  margin-bottom: 6px;
+  color: #000;
+}
+
+.mail-item {
+  font-size: 11px;
+  padding: 2px 4px;
+  cursor: pointer;
+}
+
+.mail-item:hover {
+  background: #000080;
+  color: #fff;
+}
+
+/* ── Stage text ─────────────────────── */
 .stage-text h1 {
   font-family: 'VCR', monospace;
   font-size: clamp(3rem, 8vw, 7rem);
